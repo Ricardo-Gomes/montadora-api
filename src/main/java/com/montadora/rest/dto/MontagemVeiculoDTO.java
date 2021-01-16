@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class VeiculoDTO {
+public class MontagemVeiculoDTO {
 
 	private Long idChasi;
 	private Long idCor;
 	private Long idMotor;
-	private Long idPneus;
+	private Long idPneu;
 }

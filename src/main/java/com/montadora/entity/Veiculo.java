@@ -37,5 +37,5 @@ public class Veiculo {
 	
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id", name = "fk_pneus")
-	private Pneus pneus;
+	private Pneu pneu;
 }

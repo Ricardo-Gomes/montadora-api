@@ -14,32 +14,32 @@ import org.springframework.web.server.ResponseStatusException;
 import com.montadora.entity.Chasi;
 import com.montadora.entity.Cor;
 import com.montadora.entity.Motor;
-import com.montadora.entity.Pneus;
+import com.montadora.entity.Pneu;
 import com.montadora.entity.Veiculo;
 import com.montadora.repository.ChasiRepository;
 import com.montadora.repository.CorRepository;
 import com.montadora.repository.MotorRepository;
-import com.montadora.repository.PneusRepository;
-import com.montadora.repository.VeiculoRepository;
-import com.montadora.rest.dto.VeiculoDTO;
+import com.montadora.repository.PneuRepository;
+import com.montadora.repository.MontagemVeiculoRepository;
+import com.montadora.rest.dto.MontagemVeiculoDTO;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/veiculo")
+@RequestMapping("/api/montagem")
 @RequiredArgsConstructor
 @CrossOrigin("http://localhost:4200")
-public class VeiculoController {
+public class MontagemVeiculoController {
 
-	private VeiculoRepository repository;
+	private MontagemVeiculoRepository repository;
 	private ChasiRepository chasiRepository;
 	private CorRepository corRepository;
 	private MotorRepository motorRepository;
-	private PneusRepository pneusRepository;
+	private PneuRepository pneuRepository;
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Veiculo realizarMontagem(@RequestBody @Valid VeiculoDTO dto) {
+	public Veiculo realizarMontagem(@RequestBody @Valid MontagemVeiculoDTO dto) {
 
 		Long idChasi = dto.getIdChasi();
 
@@ -56,21 +56,23 @@ public class VeiculoController {
 		Motor motor = motorRepository.findById(idMotor)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Motor Inexistente"));
 
-		Long idPneus = dto.getIdPneus();
+		Long idPneus = dto.getIdPneu();
 
-		Pneus pneus = pneusRepository.findById(idPneus)
-				.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Pneus Inexistente"));
+		Pneu pneu = pneuRepository.findById(idPneus)
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Pneu Inexistente"));
 
 		Veiculo veiculo = new Veiculo();
 
 		veiculo.setChasi(chasi);
 		veiculo.setCor(cor);
 		veiculo.setMotor(motor);
-		veiculo.setPneus(pneus);
+		veiculo.setPneu(pneu);
 
 		return repository.save(veiculo);
 
 	}
+	
+	
 
 //	@GetMapping
 //	public List<Veiculo> obterTodos() {

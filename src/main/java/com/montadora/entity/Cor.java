@@ -2,6 +2,8 @@ package com.montadora.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,6 +28,9 @@ public class Cor {
 	@Column(nullable = false, length = 150)
 	private String descricao;
 	
-	@Column(nullable = false, length = 150)
-	private String tipo;
+	//@Column(nullable = false, length = 150)
+	//private String tipo;
+	
+	@Enumerated(EnumType.STRING)
+	private TipoCor tipoCor;
 }
