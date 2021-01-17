@@ -39,6 +39,6 @@ public class Motor {
 
 	@NotNull(message = "O campo Preço é obrigatorio.")
 	@Column(nullable = false)
-	private BigDecimal preco;
+	private Double preco;
 
 }

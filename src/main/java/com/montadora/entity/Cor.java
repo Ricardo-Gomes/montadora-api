@@ -28,9 +28,10 @@ public class Cor {
 	@Column(nullable = false, length = 150)
 	private String descricao;
 	
-	//@Column(nullable = false, length = 150)
-	//private String tipo;
+	@Column(nullable = false, length = 150)
+	private Double tipo;
+
 	
-	@Enumerated(EnumType.STRING)
-	private TipoCor tipoCor;
+//	@Enumerated(EnumType.STRING)
+//	private TipoCor tipoCor;
 }

@@ -32,5 +32,5 @@ public class Pneu {
 
 	@NotNull(message = "O campo Preço é obrigatorio.")
 	@Column(nullable = false)
-	private BigDecimal preco;
+	private Double preco;
 }

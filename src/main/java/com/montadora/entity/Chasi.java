@@ -37,6 +37,6 @@ public class Chasi {
 
 	@NotNull(message = "O campo Preço é obrigatorio.")
 	@Column(nullable = false)
-	private BigDecimal preco;
+	private Double preco;
 	
 }

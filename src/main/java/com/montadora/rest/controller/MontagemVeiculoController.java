@@ -2,6 +2,7 @@ package com.montadora.rest.controller;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,10 +19,11 @@ import com.montadora.entity.Pneu;
 import com.montadora.entity.Veiculo;
 import com.montadora.repository.ChasiRepository;
 import com.montadora.repository.CorRepository;
+import com.montadora.repository.VeiculoRepository;
 import com.montadora.repository.MotorRepository;
 import com.montadora.repository.PneuRepository;
-import com.montadora.repository.MontagemVeiculoRepository;
 import com.montadora.rest.dto.MontagemVeiculoDTO;
+import com.montadora.service.MontagemService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -31,11 +33,23 @@ import lombok.RequiredArgsConstructor;
 @CrossOrigin("http://localhost:4200")
 public class MontagemVeiculoController {
 
-	private MontagemVeiculoRepository repository;
+	@Autowired
+	private VeiculoRepository repository;
+	
+	@Autowired
 	private ChasiRepository chasiRepository;
+	
+	@Autowired
 	private CorRepository corRepository;
+	
+	@Autowired
 	private MotorRepository motorRepository;
+	
+	@Autowired
 	private PneuRepository pneuRepository;
+	
+	@Autowired
+	private MontagemService montagemService;
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
@@ -67,20 +81,11 @@ public class MontagemVeiculoController {
 		veiculo.setCor(cor);
 		veiculo.setMotor(motor);
 		veiculo.setPneu(pneu);
+		
+		montagemService.verificacaoMontagem(chasi, cor, motor, pneu);
+		montagemService.calcularMontagem(chasi, cor, motor, pneu);
 
 		return repository.save(veiculo);
 
 	}
-	
-	
-
-//	@GetMapping
-//	public List<Veiculo> obterTodos() {
-//		return repository.findAll();
-//	}
-//
-//	@GetMapping("{id}")
-//	public Veiculo acharPorId(@PathVariable Long id) {
-//		return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-//	}
 }
